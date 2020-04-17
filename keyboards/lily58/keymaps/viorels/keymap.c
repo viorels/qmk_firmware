@@ -125,11 +125,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |   /  |   7  |   8  |   9  |   -  |      |
+ * |      |QWERTY|Colema|      |      |      |                    |   /  |   7  |   8  |   9  |   -  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | VAL+ | SAT+ | HUE+ |RGB ON|QWERTY|-------.    ,-------|   *  |   4  |   5  |   6  |   +  | CALC |
+ * |      | VAL+ | SAT+ | HUE+ |RGB ON|      |-------.    ,-------|   *  |   4  |   5  |   6  |   +  | CALC |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * | CAPS | VAL- | SAT- | HUE- | MODE |Colema|-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
+ * | CAPS | VAL- | SAT- | HUE- | MODE |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LGUI | LAlt |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -137,9 +137,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PSLS, KC_7,    KC_8,    KC_9,    KC_PMNS, XXXXXXX, \
-  XXXXXXX, RGB_VAI, RGB_SAI, RGB_HUI, RGB_TOG, DF(_QWERTY),               KC_PAST, KC_4,    KC_5,    KC_6,    KC_PPLS, KC_CALC, \
-  KC_CAPS, RGB_VAD, RGB_SAD, RGB_HUD, RGB_MOD, DF(_COLEMAK), XXXXXXX, XXXXXXX, KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  XXXXXXX, \
+  XXXXXXX, DF(_QWERTY), DF(_COLEMAK), XXXXXXX, XXXXXXX, XXXXXXX,          KC_PSLS, KC_7,    KC_8,    KC_9,    KC_PMNS, XXXXXXX, \
+  XXXXXXX, RGB_VAI, RGB_SAI, RGB_HUI, RGB_TOG, XXXXXXX,                   KC_PAST, KC_4,    KC_5,    KC_6,    KC_PPLS, KC_CALC, \
+  KC_CAPS, RGB_VAD, RGB_SAD, RGB_HUD, RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  XXXXXXX, \
                              _______, _______, _______, _______, _______,  _______, _______, _______ \
   ),
 };
