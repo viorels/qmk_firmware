@@ -9,7 +9,6 @@
 #define L_RAISE 8
 #define L_ADJUST 16
 #define L_ADJUST_TRI 28
-#define L_NUMPAD 32
 
 char layer_state_str[24];
 
@@ -31,9 +30,6 @@ const char *read_layer_state(void) {
   case L_ADJUST:
   case L_ADJUST_TRI:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Adjust");
-    break;
-  case L_NUMPAD:
-    snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Numpad");
     break;
   default:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Undef-%ld", layer_state);
