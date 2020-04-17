@@ -119,7 +119,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______, _______, _______, _______, _______,                     KC_PGUP, KC_HOME, KC_UP,   KC_END, XXXXXXX, XXXXXXX, \
   _______, _______, _______, _______, _______, _______,                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX, \
   _______, _______, _______, _______, _______, _______,  _______, _______,  _______, _______, _______,  _______, _______, _______, \
-                             _______, _______, _______,  _______, _______,  _______, _______, _______ \
+                             _______, _______, _______,  _______, _______,  _______, KC_BSPC, _______ \
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -129,9 +129,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      | VAL+ | SAT+ | HUE+ |RGB ON|      |-------.    ,-------|   *  |   4  |   5  |   6  |   +  | CALC |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * | CAPS | VAL- | SAT- | HUE- | MODE |      |-------|    |-------|   0  |   1  |   2  |   3  |   .  |      |
+ * | CAPS | VAL- | SAT- | HUE- | MODE |      |-------|    |-------|  INS |   1  |   2  |   3  |   .  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LGUI | LAlt |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+ *                   | LGUI | LAlt |LOWER | /Space  /       \Enter \  |  0   |BackSP| RGUI |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -139,8 +139,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   XXXXXXX, DF(_QWERTY), DF(_COLEMAK), XXXXXXX, XXXXXXX, XXXXXXX,          KC_PSLS, KC_7,    KC_8,    KC_9,    KC_PMNS, XXXXXXX, \
   XXXXXXX, RGB_VAI, RGB_SAI, RGB_HUI, RGB_TOG, XXXXXXX,                   KC_PAST, KC_4,    KC_5,    KC_6,    KC_PPLS, KC_CALC, \
-  KC_CAPS, RGB_VAD, RGB_SAD, RGB_HUD, RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  XXXXXXX, \
-                             _______, _______, _______, _______, _______,  _______, _______, _______ \
+  KC_CAPS, RGB_VAD, RGB_SAD, RGB_HUD, RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, KC_INSERT, KC_1,  KC_2,    KC_3,    KC_DOT,  XXXXXXX, \
+                             _______, _______, _______, _______, _______, KC_0,    _______, _______ \
   ),
 };
 
