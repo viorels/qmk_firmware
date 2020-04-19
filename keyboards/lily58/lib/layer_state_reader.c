@@ -13,6 +13,7 @@
 char layer_state_str[24];
 
 const char *read_layer_state(void) {
+  // get_highest_layer? https://docs.qmk.fm/#/feature_oled_driver
   switch (layer_state)
   {
   case L_BASE:
