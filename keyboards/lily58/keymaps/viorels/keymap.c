@@ -265,3 +265,73 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
   return true;
 }
+
+#ifdef ENCODER_ENABLE
+void encoder_update_user(uint8_t index, bool clockwise) {
+  if (IS_LAYER_ON(_LOWER)) {
+  }
+  else if (IS_LAYER_ON(_RAISE)) {
+    if (clockwise) {
+        tap_code(KC_PGDN);
+    } else {
+        tap_code(KC_PGUP);
+    }
+  }
+  else if (IS_LAYER_ON(_ADJUST)) {
+    // volume up/down
+    #ifdef EXTRAKEY_ENABLE
+    if (clockwise) {
+        tap_code(KC_VOLU);
+    } else {
+        tap_code(KC_VOLD);
+    }
+    #endif
+  }
+  else {  // default layer
+    // change desktop ctrl-alt-up/down (also move window with shift)
+    if ((get_mods() & MOD_BIT(KC_LCTL)) && (get_mods() & MOD_BIT(KC_LALT))) {
+      if (clockwise) {
+          tap_code(KC_DOWN);
+      } else {
+          tap_code(KC_UP);
+      }
+    }
+    // alt-tab for windows, ctrl-tab for browser tabs (XOR/(!a != !b), only ONE of alt/ctrl pressed)
+    else if (!(get_mods() & MOD_BIT(KC_LCTL)) != !(get_mods() & MOD_BIT(KC_LALT))) {
+      if (clockwise) {
+          tap_code(KC_TAB);
+      } else {
+          register_code(KC_LSFT);
+          tap_code(KC_TAB);
+          unregister_code(KC_LSFT);
+      }
+    }
+    // super-tab changes between windows of the same app
+    else if (get_mods() & MOD_BIT(KC_LGUI)) {
+      if (clockwise) {
+          tap_code(KC_GRAVE);
+      } else {
+          register_code(KC_LSFT);
+          tap_code(KC_GRAVE);
+          unregister_code(KC_LSFT);
+      }
+    }
+    // mouse wheel by default
+    else {
+      if (clockwise) {
+        #ifdef MOUSEKEY_ENABLE
+          tap_code(KC_MS_WH_DOWN);
+        #else
+          tap_code(KC_PGDN);
+        #endif
+      } else {
+        #ifdef MOUSEKEY_ENABLE
+          tap_code(KC_MS_WH_UP);
+        #else
+          tap_code(KC_PGUP);
+        #endif
+      }
+    }
+  }
+}
+#endif

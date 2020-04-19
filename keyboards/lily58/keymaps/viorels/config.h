@@ -24,11 +24,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Select hand configuration */
 
-#define MASTER_LEFT
-// #define MASTER_RIGHT
+// #define MASTER_LEFT
+#define MASTER_RIGHT
 // #define EE_HANDS
 
 #define GRAVE_ESC_SHIFT_OVERRIDE
+
+#define ENCODERS_PAD_A { F5 }
+#define ENCODERS_PAD_B { F4 }
+#define ENCODER_RESOLUTION 4
 
 #define SSD1306OLED
 
