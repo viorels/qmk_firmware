@@ -269,13 +269,20 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef ENCODER_ENABLE
 void encoder_update_user(uint8_t index, bool clockwise) {
   if (IS_LAYER_ON(_LOWER)) {
+    // undo/redo
+    register_code(KC_LCTL);
+    if (clockwise) {
+      register_code(KC_LSFT);
+      tap_code(KC_Z);
+      unregister_code(KC_LSFT);
+    }
+    else {
+      tap_code(KC_Z);
+    }
+    unregister_code(KC_LCTL);
   }
   else if (IS_LAYER_ON(_RAISE)) {
-    if (clockwise) {
-        tap_code(KC_PGDN);
-    } else {
-        tap_code(KC_PGUP);
-    }
+    // nothing on RAISE layer, unconfortable to use
   }
   else if (IS_LAYER_ON(_ADJUST)) {
     // volume up/down
