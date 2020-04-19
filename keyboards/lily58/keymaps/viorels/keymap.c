@@ -82,11 +82,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   ~  |   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   ^  |   &  |   *  |   [  |   ]  | F12  |
+ * |   ~  |   !  |   @  |   #  |   $  |   %  |                    |   ^  |   &  |   *  |   [  |   ]  | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |DeskUP|      |      |      |      |                    |      |   _  |   +  |   (  |   )  |  |   |
+ * |      |      |      |      |      |      |-------.    ,-------|      |   _  |   +  |   (  |   )  |  |   |
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
- * |      |DeskDN|      |      |      |      |-------|    |-------|      |   -  |   =  |   {  |   }  |  \   |
+ * |      |      |      |MOUSE |      |      |-------|    |-------|      |   -  |   =  |   {  |   }  |  \   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LGUI | LAlt |LOWER | /Space  /       \Enter \  |RAISE | DEL  | RGUI |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -95,8 +95,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT( \
   KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                     KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, \
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LBRC, KC_RBRC, KC_F12, \
-  _______, LCA(KC_UP), _______, _______, _______, _______,                   XXXXXXX, KC_UNDS, KC_PLUS,KC_LPRN, KC_RPRN, KC_PIPE,\
-  _______, LCA(KC_DOWN), _______, _______, _______, _______, _______, _______, XXXXXXX, KC_MINS, KC_EQL, KC_LCBR, KC_RCBR, RSFT_T(KC_BSLS), \
+  _______, _______, KC_MS_BTN2, KC_MS_UP, KC_MS_BTN1, KC_MS_WH_UP,                   XXXXXXX, KC_UNDS, KC_PLUS,KC_LPRN, KC_RPRN, KC_PIPE,\
+  _______, KC_MS_BTN1, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, KC_MS_WH_DOWN, _______, _______, XXXXXXX, KC_MINS, KC_EQL, KC_LCBR, KC_RCBR, RSFT_T(KC_BSLS), \
                              _______, _______, _______, _______, _______,  _______, KC_DEL, _______\
 ),
 /* RAISE
