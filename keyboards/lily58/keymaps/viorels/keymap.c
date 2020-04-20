@@ -271,16 +271,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   // switch(biton32(layer_state)) {
   if (IS_LAYER_ON(_LOWER)) {
     // undo/redo
-    register_code(KC_LCTL);
-    if (clockwise) {
-      register_code(KC_LSFT);
-      tap_code(KC_Z);
-      unregister_code(KC_LSFT);
-    }
-    else {
-      tap_code(KC_Z);
-    }
-    unregister_code(KC_LCTL);
+    clockwise ? tap_code16(LCTL(LSFT(KC_Z))) : tap_code16(LCTL(KC_Z));
   }
   else if (IS_LAYER_ON(_RAISE)) {
     // nothing on RAISE layer, unconfortable to use
@@ -298,39 +289,19 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
     // alt-tab for windows, ctrl-tab for browser tabs (XOR/(!a != !b), only ONE of alt/ctrl pressed)
     else if (!(get_mods() & MOD_BIT(KC_LCTL)) != !(get_mods() & MOD_BIT(KC_LALT))) {
-      if (clockwise) {
-          tap_code(KC_TAB);
-      } else {
-          register_code(KC_LSFT);
-          tap_code(KC_TAB);
-          unregister_code(KC_LSFT);
-      }
+        clockwise ? tap_code(KC_TAB) : tap_code16(LSFT(KC_TAB));
     }
     // super-tab changes between windows of the same app
     else if (get_mods() & MOD_BIT(KC_LGUI)) {
-      if (clockwise) {
-          tap_code(KC_GRAVE);
-      } else {
-          register_code(KC_LSFT);
-          tap_code(KC_GRAVE);
-          unregister_code(KC_LSFT);
-      }
+        clockwise ? tap_code(KC_GRAVE) : tap_code16(LSFT(KC_GRAVE));
     }
     // mouse wheel by default
     else {
-      if (clockwise) {
         #ifdef MOUSEKEY_ENABLE
-          tap_code(KC_MS_WH_DOWN);
+            clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
         #else
-          tap_code(KC_PGDN);
+            clockwise ? tap_code(KC_PGDN) : tap_code(KC_PGUP);
         #endif
-      } else {
-        #ifdef MOUSEKEY_ENABLE
-          tap_code(KC_MS_WH_UP);
-        #else
-          tap_code(KC_PGUP);
-        #endif
-      }
     }
   }
 }
