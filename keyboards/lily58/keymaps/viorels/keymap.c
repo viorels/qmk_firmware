@@ -255,7 +255,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   // switch(biton32(layer_state)) {
   if (IS_LAYER_ON(_LOWER)) {
     // undo/redo
-    clockwise ? tap_code16(LCTL(LSFT(KC_Z))) : tap_code16(LCTL(KC_Z));
+    clockwise ? tap_code16(LCTL(KC_Y)) : tap_code16(LCTL(KC_Z));
   }
   else if (IS_LAYER_ON(_RAISE)) {
     // nothing on RAISE layer, unconfortable to use
