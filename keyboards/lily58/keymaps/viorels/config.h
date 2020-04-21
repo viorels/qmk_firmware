@@ -30,11 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define GRAVE_ESC_SHIFT_OVERRIDE
 
-//#define NUMBER_OF_ENCODERS 1
 #define ENCODERS_PAD_A { F5 }
 #define ENCODERS_PAD_B { F4 }
-#define ENCODERS_PAD_A_RIGHT { F5 }
-#define ENCODERS_PAD_B_RIGHT { F4 }
 
 #define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
 
