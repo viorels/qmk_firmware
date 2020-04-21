@@ -36,6 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ENCODERS_PAD_A_RIGHT { F5 }
 #define ENCODERS_PAD_B_RIGHT { F4 }
 
+#define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
+
 #define USE_SERIAL_PD2
 
 #define TAPPING_FORCE_HOLD
