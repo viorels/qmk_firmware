@@ -16,9 +16,9 @@ const char *read_layer_state(void) {
   switch (layer_state)
   {
   case L_BASE:
-    if (default_layer_state == 1)
+    if (default_layer_state == (1UL << L_BASE))
       snprintf(layer_state_str, sizeof(layer_state_str), "Layer: QWERTY");
-    else if (default_layer_state == 2)
+    else if (default_layer_state == (1UL << L_COLEMAK))
       snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Colemak");
     break;
   case L_RAISE:
