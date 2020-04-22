@@ -291,4 +291,11 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif
 
-
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LSFT_T(KC_SPC):
+      return true;
+    default:
+      return false;
+  }
+}
