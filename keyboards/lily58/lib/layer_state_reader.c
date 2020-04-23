@@ -4,6 +4,7 @@
 #include "lily58.h"
 
 #define L_BASE 0
+#define L_QWERTY (1 << 0)
 #define L_COLEMAK (1 << 1)
 #define L_LOWER (1 << 2)
 #define L_RAISE (1 << 3)
@@ -16,9 +17,9 @@ const char *read_layer_state(void) {
   switch (layer_state)
   {
   case L_BASE:
-    if (default_layer_state == (1UL << L_BASE))
+    if (default_layer_state == L_QWERTY)
       snprintf(layer_state_str, sizeof(layer_state_str), "Layer: QWERTY");
-    else if (default_layer_state == (1UL << L_COLEMAK))
+    else if (default_layer_state == L_COLEMAK)
       snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Colemak");
     break;
   case L_RAISE:
