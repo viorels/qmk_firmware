@@ -146,6 +146,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 int RGB_current_mode;
 
+/*
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);  // XXX: does NOT allow direct change to _ADJUST
+    return state;
+}
+*/
+
 // Setting ADJUST layer RGB back to default
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
   if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
@@ -204,6 +211,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #endif
     // set_timelog();
   }
+
+  // If console is enabled, it will print the matrix position and status of each key pressed
+  #ifdef CONSOLE_ENABLE
+  uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
+  #endif
 
   switch (keycode) {
     case QWERTY:
@@ -298,4 +310,12 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
     default:
       return false;
   }
+}
+
+void keyboard_post_init_user(void) {
+  // Customise these values to desired behaviour
+  debug_enable=true;
+  //debug_matrix=true;
+  //debug_keyboard=true;
+  //debug_mouse=true;
 }

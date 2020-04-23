@@ -36,5 +36,19 @@ const char *read_layer_state(void) {
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Undef-%ld", layer_state);
   }
 
+/*
+  snprintf(layer_state_str, sizeof(layer_state_str), "Layer: 00000");
+  unsigned int n = layer_state;
+  int i = 7; // should be sizeof(layer_state_str) - 5 - 1;
+  while (n) {
+    if (n & 1)
+        layer_state_str[i] = '1';
+    else
+        layer_state_str[i] = '0';
+    i++;
+    n >>= 1;
+  }
+*/
+
   return layer_state_str;
 }
