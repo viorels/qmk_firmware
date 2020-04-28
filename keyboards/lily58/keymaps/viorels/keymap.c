@@ -204,6 +204,14 @@ void oled_task_user(void) {
 }
 #endif // OLED_DRIVER_ENABLE
 
+#define WITHOUT_MODS(...) \
+  do { \
+    uint8_t _real_mods = get_mods(); \
+    clear_mods(); \
+    { __VA_ARGS__ } \
+    set_mods(_real_mods); \
+  } while (0)
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
 #ifdef OLED_DRIVER_ENABLE
@@ -274,7 +282,13 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   else if (IS_LAYER_ON(_LOWER)) {
     // undo/redo
     if (get_mods() & MOD_BIT(KC_LSHIFT)) {  // use shift-z for redo
-      tap_code16(LCTL(KC_Z));
+        if (clockwise) {
+            tap_code16(LCTL(KC_Z));         // shift is already pressed
+        } else {
+            WITHOUT_MODS({
+                tap_code16(LCTL(KC_Z));
+            });
+        }
     }
     else {                                  // use ctrl-y for redo
       clockwise ? tap_code16(LCTL(KC_Y)) : tap_code16(LCTL(KC_Z));
