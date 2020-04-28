@@ -273,7 +273,12 @@ void encoder_update_user(uint8_t index, bool clockwise) {
   }
   else if (IS_LAYER_ON(_LOWER)) {
     // undo/redo
-    clockwise ? tap_code16(LCTL(KC_Y)) : tap_code16(LCTL(KC_Z));
+    if (get_mods() & MOD_BIT(KC_LSHIFT)) {  // use shift-z for redo
+      tap_code16(LCTL(KC_Z));
+    }
+    else {                                  // use ctrl-y for redo
+      clockwise ? tap_code16(LCTL(KC_Y)) : tap_code16(LCTL(KC_Z));
+    }
   }
   else if (IS_LAYER_ON(_RAISE)) {
     // nothing on RAISE layer, unconfortable to use
