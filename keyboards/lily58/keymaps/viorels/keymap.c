@@ -29,6 +29,7 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  BITCOIN,
   JSARROW
 };
 
@@ -119,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
   _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_COLN, KC_UNDS, KC_EQL,  KC_LPRN, KC_RPRN, KC_DQUO, \
-  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, XXXXXXX, JSARROW, _______, KC_ASTR, KC_PLUS, KC_MINS, KC_LBRC, KC_RBRC, RSFT_T(KC_BSLS), \
+  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, BITCOIN, JSARROW, _______, KC_ASTR, KC_PLUS, KC_MINS, KC_LBRC, KC_RBRC, RSFT_T(KC_BSLS), \
                              _______, _______, _______, _______, _______, RAISE,   _______, _______\
 // UC(0x20bf) ₿
 ),
@@ -267,6 +268,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
+        break;
+    case BITCOIN:
+        if (record->event.pressed) {
+            tap_code16(MEH(KC_U));
+            tap_code(KC_2);
+            tap_code(KC_0);
+            tap_code(KC_B);
+            tap_code(KC_F);
+            tap_code(KC_SPACE);
+        }
         break;
     case JSARROW:
         if (record->event.pressed) {
