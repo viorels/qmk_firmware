@@ -271,11 +271,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
     case BITCOIN:
         if (record->event.pressed) {
+            uint16_t bitcoin[] = {KC_2, KC_0, KC_B, KC_F};
             tap_code16(MEH(KC_U));
-            tap_code(KC_2);
-            tap_code(KC_0);
-            tap_code(KC_B);
-            tap_code(KC_F);
+            uint16_t *bitcoin_end = bitcoin + sizeof(bitcoin)/sizeof(bitcoin[0]);
+            for (uint16_t *it = bitcoin; it != bitcoin_end; ++it)
+                tap_code(*it);
             tap_code(KC_SPACE);
         }
         break;
