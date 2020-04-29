@@ -331,6 +331,19 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+uint16_t get_tapping_term(uint16_t keycode) {
+  switch (keycode) {
+    // case SFT_T(KC_SPC):
+    //   return TAPPING_TERM + 1250;
+    // case LT(1, KC_GRV):
+    //   return 130;
+    case LCTL_T(KC_BSPC):
+      return TAPPING_TERM + 25;
+    default:
+      return TAPPING_TERM;
+  }
+}
+
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
   debug_enable=true;
