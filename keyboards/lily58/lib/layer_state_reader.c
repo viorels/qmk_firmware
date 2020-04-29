@@ -10,6 +10,7 @@
 #define L_RAISE (1 << 3)
 #define L_ADJUST (1 << 4)
 #define L_ADJUST_TRI (L_ADJUST | L_RAISE | L_LOWER)
+#define L_ADJUST_TEMP (L_ADJUST | L_LOWER)
 
 char layer_state_str[24];
 
@@ -30,6 +31,7 @@ const char *read_layer_state(void) {
     break;
   case L_ADJUST:
   case L_ADJUST_TRI:
+  case L_ADJUST_TEMP:
     snprintf(layer_state_str, sizeof(layer_state_str), "Layer: Adjust");
     break;
   default:
