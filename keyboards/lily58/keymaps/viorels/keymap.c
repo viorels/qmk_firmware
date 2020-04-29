@@ -332,6 +332,9 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     // mouse wheel by default
     else {
         #ifdef MOUSEKEY_ENABLE
+            // "MK_W_OFFSET_UNMOD 2" should already send 2 clicks, but it doesn't
+            clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
+            _delay_ms(MK_W_INTERVAL_UNMOD);
             clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
         #else
             clockwise ? tap_code(KC_PGDN) : tap_code(KC_PGUP);
