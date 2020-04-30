@@ -147,14 +147,44 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+void rgblight_set_hsv_and_mode(uint8_t hue, uint8_t sat, uint8_t val, uint8_t mode) {
+    rgblight_sethsv_noeeprom(hue, sat, val);
+    wait_us(175);  // Add a slight delay between color and mode to ensure it's processed correctly
+    rgblight_mode_noeeprom(mode);
+}
+
 int RGB_current_mode;
 
-/*
 layer_state_t layer_state_set_user(layer_state_t state) {
-    state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);  // XXX: does NOT allow direct change to _ADJUST
+    // state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);  // XXX: does NOT allow direct change to _ADJUST
+
+    switch (get_highest_layer(state)) {
+        case _RAISE:
+            rgblight_set_hsv_and_mode(HSV_GREEN, RGBLIGHT_MODE_BREATHING + 3);
+            break;
+        case _LOWER:
+            rgblight_set_hsv_and_mode(HSV_YELLOW, RGBLIGHT_MODE_BREATHING + 3);
+            break;
+        case _ADJUST:
+            rgblight_set_hsv_and_mode(HSV_RED, RGBLIGHT_MODE_KNIGHT + 2);
+            break;
+        default:  //  for any other layers, or the default layer
+        {
+            uint8_t mode = RGBLIGHT_MODE_STATIC_LIGHT;
+            switch (get_highest_layer(default_layer_state)) {
+                case _COLEMAK:
+                    rgblight_set_hsv_and_mode(HSV_BLUE, mode);
+                    break;
+                default:
+                    rgblight_set_hsv_and_mode(HSV_CYAN, mode);
+                    break;
+            }
+            break;
+        }
+    }
+
     return state;
 }
-*/
 
 // Setting ADJUST layer RGB back to default
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
