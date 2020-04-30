@@ -328,10 +328,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void encoder_update_user(uint8_t index, bool clockwise) {
   // switch(biton32(layer_state)) {
   if (IS_LAYER_ON(_ADJUST)) {
-    // volume up/down
-    #ifdef EXTRAKEY_ENABLE
-    clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
-    #endif
+    clockwise ? tap_code(KC_BRIU) : tap_code(KC_BRID);
   }
   else if (IS_LAYER_ON(_LOWER)) {
     // undo/redo
@@ -349,7 +346,10 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
   }
   else if (IS_LAYER_ON(_RAISE)) {
-    // nothing on RAISE layer, unconfortable to use
+    // volume up/down
+    #ifdef EXTRAKEY_ENABLE
+    clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
+    #endif
   }
   else {  // default layer
     // change desktop ctrl-alt-up/down (also move window with shift)
