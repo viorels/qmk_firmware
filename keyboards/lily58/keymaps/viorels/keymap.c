@@ -16,6 +16,7 @@ extern rgblight_config_t rgblight_config;
 #endif
 
 extern uint8_t is_master;
+uint16_t adjust_lock_timer;
 
 #define _QWERTY 0
 #define _COLEMAK 1
@@ -100,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_WH_U, KC_HOME, KC_UP,   KC_END,  KC_PGUP,                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_F12, \
   _______, KC_WH_D, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN,                    KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, _______, \
   _______, C(KC_Z), C(KC_X), C(KC_C), C(KC_V), XXXXXXX,  _______, _______,  XXXXXXX, C(KC_LEFT), XXXXXXX, C(KC_RIGHT), XXXXXXX, _______, \
-                             _______, _______, _______,  _______, _______,  TT(_ADJUST), _______, KC_LALT \
+                             _______, _______, _______,  _______, _______,  _______, _______, KC_LALT \
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -285,9 +286,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         layer_on(_RAISE);
         update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+        adjust_lock_timer = timer_read();
       } else {
         layer_off(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+        // temporary lock ADJUST layer on RAISE release, until LOWER is released
+        if (timer_elapsed(adjust_lock_timer) > TAPPING_TERM) {
+          update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+        }
       }
       return false;
       break;
