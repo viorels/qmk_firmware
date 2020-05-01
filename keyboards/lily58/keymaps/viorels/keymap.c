@@ -412,3 +412,80 @@ void keyboard_post_init_user(void) {
   rgblight_sethsv_noeeprom(HSV_BLUE); // sets the color to blue without saving
   rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 4); // sets mode to Fast breathing without saving
 }
+
+// copied from Curry
+
+extern rgblight_config_t rgblight_config;
+void rgblight_sethsv_default_helper(uint8_t index) { rgblight_sethsv_at(rgblight_config.hue, rgblight_config.sat, rgblight_config.val, index); }
+
+#if defined(INDICATOR_LIGHTS)
+void set_rgb_indicators(uint8_t this_mod, uint8_t this_led, uint8_t this_osm) {
+    if (get_highest_layer(layer_state) == 0) {
+        if ((this_mod | this_osm) & MOD_MASK_SHIFT || this_led & (1 << USB_LED_CAPS_LOCK)) {
+#    ifdef SHFT_LED1
+            rgblight_sethsv_at(120, 255, 255, SHFT_LED1);
+#    endif  // SHFT_LED1
+#    ifdef SHFT_LED2
+            rgblight_sethsv_at(120, 255, 255, SHFT_LED2);
+#    endif  // SHFT_LED2
+        } else {
+#    ifdef SHFT_LED1
+            rgblight_sethsv_default_helper(SHFT_LED1);
+#    endif  // SHFT_LED1
+#    ifdef SHFT_LED2
+            rgblight_sethsv_default_helper(SHFT_LED2);
+#    endif  // SHFT_LED2
+        }
+        if ((this_mod | this_osm) & MOD_MASK_CTRL) {
+#    ifdef CTRL_LED1
+            rgblight_sethsv_at(0, 255, 255, CTRL_LED1);
+#    endif  // CTRL_LED1
+#    ifdef CTRL_LED2
+            rgblight_sethsv_at(0, 255, 255, CTRL_LED2);
+#    endif  // CTRL_LED2
+        } else {
+#    ifdef CTRL_LED1
+            rgblight_sethsv_default_helper(CTRL_LED1);
+#    endif  // CTRL_LED1
+#    ifdef CTRL_LED2
+            rgblight_sethsv_default_helper(CTRL_LED2);
+#    endif  // CTRL_LED2
+        }
+        if ((this_mod | this_osm) & MOD_MASK_GUI) {
+#    ifdef GUI_LED1
+            rgblight_sethsv_at(51, 255, 255, GUI_LED1);
+#    endif  // GUI_LED1
+#    ifdef GUI_LED2
+            rgblight_sethsv_at(51, 255, 255, GUI_LED2);
+#    endif  // GUI_LED2
+        } else {
+#    ifdef GUI_LED1
+            rgblight_sethsv_default_helper(GUI_LED1);
+#    endif  // GUI_LED1
+#    ifdef GUI_LED2
+            rgblight_sethsv_default_helper(GUI_LED2);
+#    endif  // GUI_LED2
+        }
+        if ((this_mod | this_osm) & MOD_MASK_ALT) {
+#    ifdef ALT_LED1
+            rgblight_sethsv_at(240, 255, 255, ALT_LED1);
+#    endif  // ALT_LED1
+#    ifdef GUI_LED2
+            rgblight_sethsv_at(240, 255, 255, ALT_LED2);
+#    endif  // GUI_LED2
+        } else {
+#    ifdef GUI_LED1
+            rgblight_sethsv_default_helper(ALT_LED1);
+#    endif  // GUI_LED1
+#    ifdef GUI_LED2
+            rgblight_sethsv_default_helper(ALT_LED2);
+#    endif  // GUI_LED2
+        }
+    }
+}
+
+/* Function for the indicators */
+void matrix_scan_user(void) {
+    set_rgb_indicators(get_mods(), host_keyboard_leds(), get_oneshot_mods());
+}
+#endif  // INDICATOR_LIGHTS
