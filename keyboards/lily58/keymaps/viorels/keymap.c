@@ -16,7 +16,9 @@ extern rgblight_config_t rgblight_config;
 #endif
 
 extern uint8_t is_master;
-uint16_t adjust_lock_timer;
+uint16_t adjust_lock_timer = 0;
+uint16_t idle_timer = 0;
+bool is_idle = true;
 
 #define _QWERTY 0
 #define _COLEMAK 1
@@ -246,7 +248,22 @@ void oled_task_user(void) {
     set_mods(_real_mods); \
   } while (0)
 
+void rgb_leds_active(void) {
+    is_idle = false;
+    idle_timer = timer_read32();
+    layer_state_set_user(layer_state);
+};
+
+void rgb_leds_idle(void) {
+    rgblight_enable_noeeprom(); // enables Rgb, without saving settings
+    rgblight_sethsv_noeeprom(HSV_BLUE); // sets the color to blue without saving
+    rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 2); // sets mode to Fast breathing without saving
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  rgb_leds_active();
+
   if (record->event.pressed) {
 #ifdef OLED_DRIVER_ENABLE
     set_keylog(keycode, record);
@@ -408,9 +425,7 @@ void keyboard_post_init_user(void) {
   //debug_keyboard=true;
   //debug_mouse=true;
 
-  rgblight_enable_noeeprom(); // enables Rgb, without saving settings
-  rgblight_sethsv_noeeprom(HSV_BLUE); // sets the color to blue without saving
-  rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 4); // sets mode to Fast breathing without saving
+  rgb_leds_idle();
 }
 
 // copied from Curry
@@ -486,6 +501,15 @@ void set_rgb_indicators(uint8_t this_mod, uint8_t this_led, uint8_t this_osm) {
 
 /* Function for the indicators */
 void matrix_scan_user(void) {
-    set_rgb_indicators(get_mods(), host_keyboard_leds(), get_oneshot_mods());
+    // don't handle leds when idle to avoid rainbow flickering
+    if (!is_idle)
+        set_rgb_indicators(get_mods(), host_keyboard_leds(), get_oneshot_mods());
+
+    // rainbow leds when idle
+    if (!is_idle && timer_elapsed(idle_timer) > OLED_TIMEOUT) {
+        is_idle = true;
+        rgb_leds_idle();
+    }
 }
+
 #endif  // INDICATOR_LIGHTS
