@@ -60,7 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // Curry
 
-#define INDICATOR_LIGHTS
+//#define INDICATOR_LIGHTS
 #define SHFT_LED1 6
 #define CTRL_LED1 7
 #define ALT_LED1 0

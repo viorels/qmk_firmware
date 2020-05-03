@@ -430,10 +430,11 @@ void keyboard_post_init_user(void) {
 
 // copied from Curry
 
+#if defined(INDICATOR_LIGHTS)
+
 extern rgblight_config_t rgblight_config;
 void rgblight_sethsv_default_helper(uint8_t index) { rgblight_sethsv_at(rgblight_config.hue, rgblight_config.sat, rgblight_config.val, index); }
 
-#if defined(INDICATOR_LIGHTS)
 void set_rgb_indicators(uint8_t this_mod, uint8_t this_led, uint8_t this_osm) {
     if (get_highest_layer(layer_state) == 0) {
         if ((this_mod | this_osm) & MOD_MASK_SHIFT || this_led & (1 << USB_LED_CAPS_LOCK)) {
@@ -499,11 +500,15 @@ void set_rgb_indicators(uint8_t this_mod, uint8_t this_led, uint8_t this_osm) {
     }
 }
 
+#endif  // INDICATOR_LIGHTS
+
 /* Function for the indicators */
 void matrix_scan_user(void) {
+    #ifdef INDICATOR_LIGHTS
     // don't handle leds when idle to avoid rainbow flickering
     if (!is_idle)
         set_rgb_indicators(get_mods(), host_keyboard_leds(), get_oneshot_mods());
+    #endif
 
     // rainbow leds when idle
     if (!is_idle && timer_elapsed(idle_timer) > OLED_TIMEOUT) {
@@ -511,5 +516,3 @@ void matrix_scan_user(void) {
         rgb_leds_idle();
     }
 }
-
-#endif  // INDICATOR_LIGHTS
