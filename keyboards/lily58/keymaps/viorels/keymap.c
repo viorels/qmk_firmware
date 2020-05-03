@@ -243,9 +243,11 @@ void oled_task_user(void) {
   } while (0)
 
 void rgb_leds_active(void) {
-    is_idle = false;
     idle_timer = timer_read32();
-    layer_state_set_user(layer_state);
+    if (is_idle) {
+        is_idle = false;
+        layer_state_set_user(layer_state);
+    }
 };
 
 void rgb_leds_idle(void) {
