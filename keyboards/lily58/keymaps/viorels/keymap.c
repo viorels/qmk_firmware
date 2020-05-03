@@ -4,18 +4,12 @@
   #include "lufa.h"
   #include "split_util.h"
 #endif
-#ifdef SSD1306OLED
-  #include "ssd1306.h"
-#endif
-
-
 
 #ifdef RGBLIGHT_ENABLE
 //Following line allows macro to read current RGB settings
 extern rgblight_config_t rgblight_config;
 #endif
 
-extern uint8_t is_master;
 uint16_t adjust_lock_timer = 0;
 uint16_t idle_timer = 0;
 bool is_idle = true;
@@ -432,7 +426,6 @@ void keyboard_post_init_user(void) {
 
 #if defined(INDICATOR_LIGHTS)
 
-extern rgblight_config_t rgblight_config;
 void rgblight_sethsv_default_helper(uint8_t index) { rgblight_sethsv_at(rgblight_config.hue, rgblight_config.sat, rgblight_config.val, index); }
 
 void set_rgb_indicators(uint8_t this_mod, uint8_t this_led, uint8_t this_osm) {
