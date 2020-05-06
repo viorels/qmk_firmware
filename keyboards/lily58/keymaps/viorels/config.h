@@ -32,6 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define ENCODERS_PAD_A { F5 }
 #define ENCODERS_PAD_B { F4 }
+#define ENCODER_RESOLUTION 4
 
 #define UNICODE_KEY_LNX LCTL(LSFT(KC_U))
 
