@@ -11,6 +11,7 @@ extern rgblight_config_t rgblight_config;
 #endif
 
 uint16_t adjust_lock_timer = 0;
+uint16_t copy_paste_timer;
 uint16_t idle_timer = 0;
 bool is_idle = true;
 
@@ -26,6 +27,7 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  KC_CCCV,
   BITCOIN,
   JSARROW
 };
@@ -40,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |Tab/LO|   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |Ctrl/B|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |Ctrl/'|
- * |------+------+------+------+------+------| BACK  |    |   W   |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|KC_CCCV|    |   W   |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LGUI | LAlt |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RAlt |
@@ -52,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \
   LT(2, KC_TAB), KC_Q, KC_W, KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
   LCTL_T(KC_BSPC), KC_A, KC_S, KC_D,  KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_WBAK,      KC_W, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_CCCV,      KC_W, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
                              KC_LGUI, KC_LALT, LOWER, LSFT_T(KC_SPC), KC_ENT, RAISE, KC_BSPC, KC_RALT \
 ),
 /* Colemak
@@ -196,6 +198,9 @@ void matrix_init_user(void) {
     #ifdef RGBLIGHT_ENABLE
       RGB_current_mode = rgblight_config.mode;
     #endif
+    #ifdef UNICODE_ENABLE
+      set_unicode_input_mode(UC_LNX);
+    #endif
 }
 
 //SSD1306 OLED update loop, make sure to enable OLED_DRIVER_ENABLE=yes in rules.mk
@@ -316,6 +321,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           layer_off(_ADJUST);
         }
         return false;
+        break;
+    case KC_CCCV:  // One key copy/paste
+        if (record->event.pressed) {
+            copy_paste_timer = timer_read();
+        } else {
+            if (timer_elapsed(copy_paste_timer) > TAPPING_TERM) {  // Hold, copy
+                tap_code16(LCTL(KC_INS));
+            } else { // Tap, paste
+                tap_code16(LSFT(KC_INS));
+            }
+        }
         break;
     case BITCOIN:
         if (record->event.pressed) {
