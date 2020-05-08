@@ -386,12 +386,8 @@ void encoder_update_user(uint8_t index, bool clockwise) {
       clockwise ? tap_code(KC_DOWN) : tap_code(KC_UP);
     }
     // alt-tab for windows, ctrl-tab for browser tabs (XOR/(!a != !b), only ONE of alt/ctrl pressed)
-    else if (!(get_mods() & MOD_BIT(KC_LCTL)) != !(get_mods() & MOD_BIT(KC_LALT))) {
+    else if (get_mods() & (MOD_BIT(KC_LCTL) | MOD_BIT(KC_LALT) | MOD_BIT(KC_LGUI))) {
         clockwise ? tap_code(KC_TAB) : tap_code16(LSFT(KC_TAB));
-    }
-    // super-tab changes between windows of the same app
-    else if (get_mods() & MOD_BIT(KC_LGUI)) {
-        clockwise ? tap_code(KC_GRAVE) : tap_code16(LSFT(KC_GRAVE));
     }
     // mouse wheel by default
     else {
