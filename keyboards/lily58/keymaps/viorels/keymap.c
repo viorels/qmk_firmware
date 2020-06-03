@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |Tab/LO|   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |Ctrl/B|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |Ctrl/'|
- * |------+------+------+------+------+------|KC_CCCV|    |   W   |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|KC_CCCV|    | MUTE  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RAlt |
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \
   LT(2, KC_TAB), KC_Q, KC_W, KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
   LCTL_T(KC_BSPC), KC_A, KC_S, KC_D,  KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_CCCV,      KC_W, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_CCCV,   KC_MUTE, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
                              KC_LALT, KC_LGUI, LOWER, LSFT_T(KC_SPC), KC_ENT, RAISE, KC_BSPC, KC_RALT \
 ),
 /* Colemak
@@ -83,9 +83,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | W_UP | Home |  Up  |  End | PgUp |                    | PgUp | Home |  Up  |  End |  Del | F12  |
+ * |      |Alt+F4|      |  Up  |      | PgUp |                    | PgUp | Home |  Up  |  End |  Del | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      | W_DN | Left | Down | Right| PgDn |-------.    ,-------| PgDn | Left | Down | Right|      |      |
+ * |      |      | Left | Down | Right| PgDn |-------.    ,-------| PgDn | Left | Down | Right|      |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      | Undo | Cut  | Copy | Paste| Ins  |-------|    |-------|      | WLeft|      |WRight|      |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -95,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_LOWER] = LAYOUT( \
-  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, \
-  _______, KC_WH_U, KC_HOME, KC_UP,   KC_END,  KC_PGUP,                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_F12, \
-  _______, KC_WH_D, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN,                    KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, _______, \
+  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, \
+  _______, A(KC_F4), XXXXXXX, KC_UP,  XXXXXXX,  KC_PGUP,                     KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_DEL,  KC_F12, \
+  _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN,                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, _______, \
   _______, C(KC_Z), C(KC_X), C(KC_INS), S(KC_INS), KC_INS, _______, XXXXXXX, XXXXXXX, C(KC_LEFT), XXXXXXX, C(KC_RIGHT), XXXXXXX, _______, \
                              _______, _______, _______,  _______, _______,  _______, _______, KC_LALT \
 ),
@@ -108,8 +108,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   ~  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |Ctrl/B|   !  |   @  |   #  |   $  |   %  |-------.    ,-------|   :  |   _  |   =  |   (  |   )  |  "   |
- * |------+------+------+------+------+------|   ₿   |    | MUTE  |------+------+------+------+------+------|
- * |LShift|   ^  |   &  |  {   |   }  |  =>  |-------|    |-------|   *  |   +  |   -  |   [  |   ]  |Shft/\|
+ * |------+------+------+------+------+------|   ₿   |    |       |------+------+------+------+------+------|
+ * |LShift|   ^  |   &  |  {   |   }  |   |  |-------|    |-------|   *  |   -  |   +  |   [  |   ]  |Shft/\|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| LAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -119,13 +119,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
   KC_TILD, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
   _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_COLN, KC_UNDS, KC_EQL,  KC_LPRN, KC_RPRN, KC_DQUO, \
-  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, JSARROW, BITCOIN, KC_MUTE, KC_ASTR, KC_PLUS, KC_MINS, KC_LBRC, KC_RBRC, RSFT_T(KC_BSLS), \
+  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_MINS, KC_PLUS, KC_LBRC, KC_RBRC, RSFT_T(KC_BSLS), \
                              _______, _______, _______, _______, _______, _______,   _______, _______\
 // UC(0x20bf) ₿
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |RGB P |RGB B |RGB SW|RGB K |      |                    | Ins  |PrntSc|ScrlLk|Pause | CALC | RESET|
+ * |      |RGB P |RGB B |RGB SW|RGB K |      |                    |      |PrntSc|ScrlLk|Pause | CALC | RESET|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |QWERTY|Colema|      |      |      |                    |   -  |   7  |   8  |   9  |   (  |   )  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -138,7 +138,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                   `----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT( \
-  KC_ESC,  RGB_M_P, RGB_M_B, RGB_M_SW, RGB_M_K, XXXXXXX,                  KC_INS,  KC_PSCR, KC_SLCK, KC_PAUS, KC_CALC, RESET, \
+  KC_ESC,  RGB_M_P, RGB_M_B, RGB_M_SW, RGB_M_K, XXXXXXX,                  XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, KC_CALC, RESET, \
   KC_TAB,  QWERTY,  COLEMAK, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_PMNS, KC_7,    KC_8,    KC_9,    KC_LPRN, KC_RPRN, \
   _______, RGB_VAI, RGB_SAI, RGB_HUI, RGB_MOD, DEBUG,                     KC_PPLS, KC_4,    KC_5,    KC_6,    KC_DOT,  XXXXXXX, \
   KC_CAPS, RGB_VAD, RGB_SAD, RGB_HUD, RGB_TOG, XXXXXXX, XXXXXXX, XXXXXXX, KC_PAST, KC_1,    KC_2,    KC_3,    KC_PSLS, XXXXXXX, \
@@ -375,10 +375,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
   }
   else if (IS_LAYER_ON(_RAISE)) {
-    // volume up/down
-    #ifdef EXTRAKEY_ENABLE
-    clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
-    #endif
+      // nothing
   }
   else {  // default layer
     // change desktop ctrl-alt-up/down (also move window with shift)
@@ -391,6 +388,11 @@ void encoder_update_user(uint8_t index, bool clockwise) {
     }
     // mouse wheel by default
     else {
+        // volume up/down
+        #ifdef EXTRAKEY_ENABLE
+        clockwise ? tap_code(KC_VOLU) : tap_code(KC_VOLD);
+        #endif
+        /*
         #ifdef MOUSEKEY_ENABLE
             // "MK_W_OFFSET_UNMOD 2" should already send 2 clicks, but it doesn't
             clockwise ? tap_code(KC_MS_WH_DOWN) : tap_code(KC_MS_WH_UP);
@@ -399,6 +401,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
         #else
             clockwise ? tap_code(KC_PGDN) : tap_code(KC_PGUP);
         #endif
+        */
     }
   }
 }
