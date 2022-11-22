@@ -85,9 +85,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    | PgUp | Home |  Up  |  End | F11  | Del  |
+ * | TAB  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F11 | Home |  Up  |  End | PgUp | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F6  |  F7  |  F8  |  F9  |  F10 |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
+ * |      |  F6  |  F7  |  F8  |  F9  |  F10 |-------.    ,-------|  F12 | Left | Down | Right| PgDn |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      | Undo | Cut  | Copy | Paste| Ins  |-------|    |-------| BBack| WLeft|      |WRight| Alt  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -98,8 +98,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_LOWER] = LAYOUT( \
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                      KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10, XXXXXXX, \
-  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                      KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
-  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,                     KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_F12, _______, \
+  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                      KC_F11, KC_HOME, KC_UP,   KC_END,  KC_PGUP,  KC_DEL, \
+  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,                     KC_F12, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN, _______, \
   _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS),KC_INS, _______, XXXXXXX, KC_WBAK, C(KC_LEFT), XXXXXXX, C(KC_RIGHT), KC_LALT, _______, \
                              _______, _______, _______,  _______, _______,  _______, _______, KC_LALT \
 ),
