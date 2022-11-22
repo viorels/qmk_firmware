@@ -119,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT( \
   KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
-  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS, \
-  _______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_COLN, KC_UNDS, KC_EQL,  KC_LPRN, KC_RPRN, _______, \
-  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_MINS, KC_PLUS, KC_LBRC, LALT_T(KC_RBRC), KC_RSFT, \
+  KC_TILD, KC_1,    KC_PMNS, KC_PPLS, KC_EQL,  XXXXXXX,                   KC_MINS, KC_COLN, KC_LBRC, KC_RBRC, KC_0,    KC_BSLS, \
+  KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_PLUS, KC_UNDS, KC_LPRN, KC_RPRN, KC_DQUO, _______, \
+  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL,  KC_LT,   KC_GT, LALT_T(KC_SLSH), KC_RSFT, \
                              _______, _______, _______, _______, _______, _______,   _______, _______\
 // UC(0x20bf) ₿
 ),
