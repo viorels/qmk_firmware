@@ -28,6 +28,7 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   LCTL_GESC,
+  LCTL_GBSP,
   KC_CCCV,
   BITCOIN,
   JSARROW
@@ -131,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   .  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |CTL/GE|      |      |      |   .  |      |-------.    ,-------|   +  |   4  |   5  |   6  |   0  | Ctrl |
+ * |CTL/GB|      |      |      |   .  |      |-------.    ,-------|   +  |   4  |   5  |   6  |   0  | Ctrl |
  * |------+------+------+------+------+------| RESET |    |       |------+------+------+------+------+------|
  * | CAPS |QWERTY|Colema|PrntSc| CALC |DEBUG |-------|    |-------|   *  |   1  |   2  |   3  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -142,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] = LAYOUT( \
   KC_ESC,  RGB_M_P, RGB_M_B, RGB_M_SW,RGB_M_K, XXXXXXX,                   XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, KC_CALC, RESET, \
   XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_DOT,  KC_PMNS, \
-  LCTL_GESC,XXXXXXX,XXXXXXX, XXXXXXX, KC_DOT,  XXXXXXX,                   KC_PPLS, KC_4,    KC_5,    KC_6,    KC_0,    KC_RCTL, \
+  LCTL_GBSP,XXXXXXX,XXXXXXX, XXXXXXX, KC_DOT,  XXXXXXX,                   KC_PPLS, KC_4,    KC_5,    KC_6,    KC_0,    KC_RCTL, \
   KC_CAPS, QWERTY,  COLEMAK, KC_PSCR, KC_CALC, DEBUG,   RESET,   XXXXXXX, KC_PAST, KC_1,    KC_2,    KC_3,    LALT_T(KC_PSLS), KC_RSFT, \
                              _______, _______, _______, _______, _______, KC_0,    _______, _______ \
   ),
@@ -327,6 +328,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
         break;
     case LCTL_GESC:
+    case LCTL_GBSP:
       if(record->event.pressed) {
         lctl_timer = timer_read();
         register_code(KC_LCTL); // Change the key to be held here
@@ -336,7 +338,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (get_mods() & MOD_BIT(KC_LGUI)) {
             tap_code(KC_GRAVE);
           } else {
-            tap_code(KC_ESC);
+            tap_code(keycode == LCTL_GESC ? KC_ESC : KC_BSPC);
           }
         }
       }
