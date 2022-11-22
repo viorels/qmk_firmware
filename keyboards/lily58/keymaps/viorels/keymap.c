@@ -27,6 +27,7 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  LCTL_GESC,
   KC_CCCV,
   BITCOIN,
   JSARROW
@@ -39,10 +40,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC/`|   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  Del |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC/`|   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
+ * | TAB  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |Ctrl/B|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |Ctrl/'|
- * |------+------+------+------+------+------|KC_CCCV|    | MUTE  |------+------+------+------+------+------|
+ * |CTL/GE|   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |Ctrl/'|
+ * |------+------+------+------+------+------|  ESC  |    | MUTE  |------+------+------+------+------+------|
  * |LShift|Alt/Z |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |Alt// |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RAlt |
@@ -53,18 +54,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_QWERTY] = LAYOUT( \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
 /*KC_GESC,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \*/
-  KC_GESC,  KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
-  LCTL_T(KC_TAB),KC_A,KC_S,  KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
-  KC_LSFT,LALT_T(KC_Z),KC_X, KC_C,    KC_V,    KC_B, KC_CCCV,   KC_MUTE, KC_N,    KC_M,    KC_COMM, KC_DOT,  LALT_T(KC_SLSH), KC_RSFT, \
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
+  LCTL_GESC,KC_A,KC_S, KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
+  KC_LSFT,LALT_T(KC_Z),KC_X, KC_C,    KC_V,    KC_B, KC_GESC,   KC_MUTE, KC_N,    KC_M,    KC_COMM, KC_DOT,  LALT_T(KC_SLSH), KC_RSFT, \
                              KC_LALT, KC_LGUI, LOWER, LSFT_T(KC_SPC), KC_ENT, RAISE, KC_BSPC, KC_RALT \
 ),
 /* Colemak
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC/`|   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  Del |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC/`|   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  |  -   |
+ * | TAB  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |Ctrl/E|   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |Ctrl/'|
+ * |CTL/GE|   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |Ctrl/'|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -278,6 +279,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   uprintf("KL: kc: %u, col: %u, row: %u, pressed: %u\n", keycode, record->event.key.col, record->event.key.row, record->event.pressed);
   #endif
 
+  static uint16_t lctl_timer;
+
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
@@ -323,6 +326,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
+    case LCTL_GESC:
+      if(record->event.pressed) {
+        lctl_timer = timer_read();
+        register_code(KC_LCTL); // Change the key to be held here
+      } else {
+        unregister_code(KC_LCTL); // Change the key that was held here, too!
+        if (timer_elapsed(lctl_timer) < TAPPING_TERM) {
+          if (get_mods() & MOD_BIT(KC_LGUI)) {
+            tap_code(KC_GRAVE);
+          } else {
+            tap_code(KC_ESC);
+          }
+        }
+      }
+      return false; // We handled this keypress
     case KC_CCCV:  // One key copy/paste
         if (record->event.pressed) {
             copy_paste_timer = timer_read();
