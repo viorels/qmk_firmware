@@ -31,9 +31,21 @@ enum custom_keycodes {
   LCTL_GBSP,
   KC_CCCV,
   BITCOIN,
-  JSARROW
+  JSARROW,
 };
 
+//Tap Dance Declarations
+enum {
+  TD_MINS_6 = 0,
+  TD_COLN_7
+};
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  //Tap once for Esc, twice for Caps Lock
+  [TD_MINS_6]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_6)
+// Other declarations would go here, separated by commas, if you have them
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -120,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT( \
   KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
-  KC_TILD, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_MINS, KC_COLN, KC_LBRC, KC_RBRC, KC_0,    KC_BSLS, \
+  KC_TILD, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      TD(TD_MINS_6), KC_COLN, KC_LBRC, KC_RBRC, KC_0,    KC_BSLS, \
   KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_PLUS, KC_UNDS, KC_LPRN, KC_RPRN, KC_DQUO, _______, \
   _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL,  KC_LT,   KC_GT, LALT_T(KC_SLSH), _______, \
                              _______, _______, _______, _______, _______, _______,   _______, _______\
@@ -442,6 +454,8 @@ uint16_t get_tapping_term(uint16_t keycode) {
     case LCTL_T(KC_BSPC):   // for slow pinky
     case LT(2, KC_TAB):
       return TAPPING_TERM + 25;
+    case TD_MINS_6:
+      return TAPPING_TERM + 500;
     default:
       return TAPPING_TERM;
   }
