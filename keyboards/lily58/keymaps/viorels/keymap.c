@@ -39,7 +39,9 @@ enum {
   TD_MINS_6 = 0,
   TD_COLN_7,
   TD_LBRC_8,
-  TD_RBRC_9
+  TD_RBRC_9,
+  TD_LEFT,
+  TD_RIGHT
 };
 
 //Tap Dance Definitions
@@ -48,7 +50,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_MINS_6]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_6),
   [TD_COLN_7]  = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_7),
   [TD_LBRC_8]  = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_8),
-  [TD_RBRC_9]  = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_9)
+  [TD_RBRC_9]  = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_9),
+  [TD_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, C(KC_LEFT)),
+  [TD_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT, C(KC_RIGHT))
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -102,9 +106,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F11 | Home |  Up  |  End | PgUp | Del  |
+ * | TAB  |  F1  |  F2  |  F3  |  F4  |  F5  |                    | PgUp | Home |  Up  |  End | F11  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F6  |  F7  |  F8  |  F9  |  F10 |-------.    ,-------|  F12 | Left | Down | Right| PgDn |      |
+ * |      |  F6  |  F7  |  F8  |  F9  |  F10 |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      | Undo | Cut  | Copy | Paste| Ins  |-------|    |-------| BBack| WLeft|      |WRight| Alt  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -115,8 +119,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_LOWER] = LAYOUT( \
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10, XXXXXXX, \
-  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F11,  KC_HOME, KC_UP,   KC_END,  KC_PGUP,  KC_DEL, \
-  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,                   KC_F12,  KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN, _______, \
+  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
+  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,                   KC_PGDN, TD(TD_LEFT), KC_DOWN, TD(TD_RIGHT), KC_F12, _______, \
   _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_INS, _______, XXXXXXX, KC_WBAK, C(KC_LEFT), XXXXXXX, C(KC_RIGHT), KC_LALT, _______, \
                              _______, _______, _______, _______, _______, _______, _______, KC_LALT \
 ),
