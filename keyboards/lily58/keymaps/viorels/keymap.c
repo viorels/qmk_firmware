@@ -152,7 +152,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |CTL/GE|      |   -  |   +  |   .  |      |-------.    ,-------|   +  |   4  |   5  |   6  |   0  | Ctrl |
+ * |CTL/GE|   .  |   -  |   -  |   +  |   *  |-------.    ,-------|   +  |   4  |   5  |   6  |   .  | Ctrl |
  * |------+------+------+------+------+------| RESET |    |       |------+------+------+------+------+------|
  * | CAPS |QWERTY|Colema|PrntSc| CALC |DEBUG |-------|    |-------|   *  |   1  |   2  |   3  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] = LAYOUT( \
   KC_ESC,  RGB_M_P, RGB_M_B, RGB_M_SW,RGB_M_K, XXXXXXX,                   XXXXXXX, KC_PSCR, KC_SLCK, KC_PAUS, KC_CALC, RESET, \
   XXXXXXX, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_PMNS, \
-  LCTL_GESC,XXXXXXX,KC_PMNS, KC_PPLS, KC_DOT,  XXXXXXX,                   KC_PPLS, KC_4,    KC_5,    KC_6,    KC_0,    KC_RCTL, \
+  LCTL_GESC,KC_DOT,KC_PSLS, KC_PMNS, KC_PPLS,  KC_PAST,                   KC_PPLS, KC_4,    KC_5,    KC_6,    KC_DOT,  KC_RCTL, \
   KC_CAPS, QWERTY,  COLEMAK, KC_PSCR, KC_CALC, DEBUG,   RESET,   XXXXXXX, KC_PAST, KC_1,    KC_2,    KC_3,    LALT_T(KC_PSLS), KC_RSFT, \
                              _______, _______, _______, _______, _______, KC_0,    _______, _______ \
   ),
