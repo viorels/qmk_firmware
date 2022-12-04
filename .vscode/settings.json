@@ -16,7 +16,11 @@
         "*.hpp": "cpp",
         "xstddef": "c",
         "type_traits": "c",
-        "utility": "c"
+        "utility": "c",
+        "hash_map": "c",
+        "hash_set": "c",
+        "bitset": "c",
+        "chrono": "c"
     },
     "[markdown]": {
         "editor.trimAutoWhitespace": false,
