@@ -471,7 +471,7 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
 
 uint16_t get_tapping_term(uint16_t keycode) {
   switch (keycode) {
-    case LCTL_T(KC_BSPC):   // for slow pinky
+    case LCTL_T(KC_ESC):   // for slow pinky
     case LT(2, KC_TAB):
       return TAPPING_TERM + 25;
     case TD_MINS_6:
