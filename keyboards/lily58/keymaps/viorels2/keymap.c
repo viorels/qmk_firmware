@@ -334,12 +334,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         adjust_lock_timer = timer_read();
       } else {
         layer_off(_RAISE);
-        // temporary lock ADJUST layer on RAISE release, until LOWER is released
+        // temporary lock ADJUST layer on RAISE tap
+        // go back on long release (or until LOWER is released)
         if (timer_elapsed(adjust_lock_timer) > TAPPING_TERM) {
           update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
         }
       }
       return false;
+      break;
+    case LT(3, KC_BSPC):
+      if (record->event.pressed) {
+        if (!record->tap.count) {
+            layer_on(_RAISE);
+            update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+            adjust_lock_timer = timer_read();
+            return false;   // prevent repeating zero on _ADJUST layer
+        }
+      } else {
+        layer_off(_RAISE);
+        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
+      }
+      return true;  // send BACKSPACE on tap/release
       break;
     case ADJUST:
         if (record->event.pressed) {
