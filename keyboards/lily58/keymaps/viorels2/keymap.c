@@ -11,7 +11,6 @@ extern rgblight_config_t rgblight_config;
 #endif
 
 uint16_t adjust_lock_timer = 0;
-uint16_t sunds_timer = 0;
 uint16_t copy_paste_timer;
 uint16_t idle_timer = 0;
 bool is_idle = true;
@@ -30,7 +29,6 @@ enum custom_keycodes {
   ADJUST,
   LCTL_GESC,
   LCTL_GBSP,
-  S_UNDS,
   KC_CCCV,
   BITCOIN,
   JSARROW,
@@ -145,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  KC_1,    KC_2,    KC_3, LT(0,KC_4), LT(0,KC_5),                KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, \
   KC_TILD, KC_EXLM, KC_AT,   KC_LBRC, KC_RBRC, KC_HASH,                   KC_PLUS, KC_UNDS, KC_LPRN, KC_RPRN, KC_COLN, KC_DQUO, \
   _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL, KC_LT, KC_GT, LALT_T(KC_SLSH), KC_BSLS, \
-                             _______, _______, _______, S_UNDS,  _______, _______,   _______, _______\
+                             _______, _______, _______, _______, _______, _______,   _______, _______\
 // UC(0x20bf) ₿
 ),
 /* ADJUST
@@ -392,18 +390,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         }
         return true;             // Return true for normal processing of tap keycode
-    case S_UNDS:
-        if (record->event.pressed) {
-            sunds_timer = timer_read();
-            register_code (KC_LSFT);
-        } else {
-            if (timer_elapsed (sunds_timer) < TAPPING_TERM) {
-                register_code (KC_MINS);
-                unregister_code (KC_MINS);
-            }
-            unregister_code (KC_LSFT);
-        }
-        break;
     case KC_CCCV:  // One key copy/paste
         if (record->event.pressed) {
             copy_paste_timer = timer_read();
