@@ -34,6 +34,18 @@ enum custom_keycodes {
   JSARROW,
 };
 
+// Left-hand home row mods
+#define GUI_A LGUI_T(KC_A)
+#define ALT_R LALT_T(KC_R)
+#define CTL_S LCTL_T(KC_S)
+#define SHFT_T LSFT_T(KC_T)
+
+// Right-hand home row mods
+#define SFT_N RSFT_T(KC_N)
+#define CTL_E RCTL_T(KC_E)
+#define ALT_I LALT_T(KC_I)
+#define GUI_O RGUI_T(KC_O)
+
 //Tap Dance Declarations
 enum {
   TD_MINS_6 = 0,
@@ -54,6 +66,14 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [TD_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, C(KC_LEFT)),
   [TD_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT, C(KC_RIGHT))
 };
+
+// const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+
+// // This globally defines all key overrides to be used
+// const key_override_t **key_overrides = (const key_override_t *[]){
+//     &delete_key_override,
+//     NULL // Null terminate the array of overrides!
+// };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -98,6 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_COLEMAK] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, _______, \
+//_______, GUI_A,   ALT_R,   CTL_S,   SHFT_T,  KC_D,                      _______, SFT_N,   CTL_E,   ALT_I,   GUI_O,   _______,
   _______, _______, KC_R,    KC_S,    KC_T,    KC_D,                      _______, KC_N,    KC_E,    KC_I,    KC_O,    _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_K,    _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______, _______, _______, _______\
