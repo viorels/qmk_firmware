@@ -14,6 +14,7 @@ uint16_t adjust_lock_timer = 0;
 uint16_t copy_paste_timer;
 uint16_t idle_timer = 0;
 bool is_idle = true;
+bool is_alt_tab_active = false;
 
 #define _QWERTY 0
 #define _COLEMAK 1
@@ -29,6 +30,7 @@ enum custom_keycodes {
   ADJUST,
   LCTL_GESC,
   LCTL_GBSP,
+  ALT_TAB,
   KC_CCCV,
   BITCOIN,
   JSARROW,
@@ -226,6 +228,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         }
     }
 
+    if (is_alt_tab_active) {
+        unregister_code(KC_LALT);
+        is_alt_tab_active = false;
+    }
+
     return state;
 }
 
@@ -399,6 +406,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
       }
       return false; // We handled this keypress
+
+    case ALT_TAB: // super alt tab macro
+        if (record->event.pressed) {
+            if (!is_alt_tab_active) {
+                is_alt_tab_active = true;
+                register_code(keycode == ALT_TAB ? KC_LALT : KC_LGUI);
+            }
+            register_code(KC_TAB);
+        } else {
+            unregister_code(KC_TAB);
+        }
+        break;
+
     case LT(0,KC_4):             // https://github.com/qmk/qmk_firmware/blob/master/docs/mod_tap.md#changing-hold-function
         if (!record->tap.count && record->event.pressed) {
             tap_code16(KC_DLR);  // Intercept hold function to send '$'
