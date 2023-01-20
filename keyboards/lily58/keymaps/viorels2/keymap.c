@@ -128,11 +128,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |  F1  |  F2  |  F3  |  F4  |  F5  |                    | PgUp | Home |  Up  |  End | F11  | Del  |
+ * |AltTAB|Alt-1 |Alt-2 |Alt-3 |Alt-4 |Alt-5 |                    | PgUp | Home |  Up  |  End | F11  | Del  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |  F6  |  F7  |  F8  |  F9  |  F10 |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
+ * |      | LGUI | LAlt | Shift| Ctrl |  Ins |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      | Undo | Cut  | Copy | Paste| Ins  |-------|    |-------| BBack| WLeft|      |WRight| Alt  |      |
+ * |      | Undo | Cut  | Copy | Paste|  Del |-------|    |-------| BBack|      |      |      | Alt  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |ADJUST|BackSP| LAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -140,10 +140,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_LOWER] = LAYOUT( \
-  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10, XXXXXXX, \
-  _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
-  _______, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,                   KC_PGDN, TD(TD_LEFT), KC_DOWN, TD(TD_RIGHT), KC_F12, _______, \
-  _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_WBAK,_______, XXXXXXX, KC_WBAK, C(KC_LEFT), XXXXXXX, C(KC_RIGHT), KC_LALT, _______, \
+  KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL, \
+  ALT_TAB, A(KC_1), A(KC_2), A(KC_3), A(KC_4),  A(KC_5),                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
+  _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,  KC_INS,                  KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,KC_F12,  _______, \
+  _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_DEL, _______, XXXXXXX, KC_WBAK, XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT, _______, \
                              _______, _______, _______, _______, _______, _______, _______, KC_LALT \
 ),
 /* RAISE
