@@ -525,14 +525,23 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
       return false;
   }
 }
-
+/*
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LT(3,KC_BSPC):
+            return true;
+        default:
+            return false;
+    }
+}
+*/
 uint16_t get_tapping_term(uint16_t keycode) {
   switch (keycode) {
     case LCTL_T(KC_ESC):   // for slow pinky
     case LT(2, KC_TAB):
       return TAPPING_TERM + 25;
-    case TD_MINS_6:
-      return TAPPING_TERM + 500;
+    case LT(3, KC_BSPC):
+      return TAPPING_TERM - 100;
     default:
       return TAPPING_TERM;
   }
