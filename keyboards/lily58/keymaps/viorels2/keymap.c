@@ -29,7 +29,6 @@ enum custom_keycodes {
   RAISE,
   ADJUST,
   LCTL_GESC,
-  LCTL_GBSP,
   ALT_TAB,
   KC_CCCV,
   BITCOIN,
@@ -381,7 +380,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
         break;
     case LCTL_GESC:
-    case LCTL_GBSP:
       if(record->event.pressed) {
         lctl_timer = timer_read();
         register_code(KC_LCTL); // Change the key to be held here
@@ -391,7 +389,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           if (get_mods() & MOD_BIT(KC_LGUI)) {
             tap_code(KC_GRAVE);
           } else {
-            tap_code(keycode == LCTL_GESC ? KC_ESC : KC_BSPC);
+            tap_code(KC_ESC);
           }
         }
       }
