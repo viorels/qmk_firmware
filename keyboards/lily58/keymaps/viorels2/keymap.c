@@ -50,21 +50,12 @@ enum custom_keycodes {
 
 //Tap Dance Declarations
 enum {
-  TD_MINS_6 = 0,
-  TD_COLN_7,
-  TD_LBRC_8,
-  TD_RBRC_9,
-  TD_LEFT,
+  TD_LEFT = 0,
   TD_RIGHT
 };
 
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for Esc, twice for Caps Lock
-  [TD_MINS_6]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_6),
-  [TD_COLN_7]  = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_7),
-  [TD_LBRC_8]  = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_8),
-  [TD_RBRC_9]  = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_9),
   [TD_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, C(KC_LEFT)),
   [TD_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT, C(KC_RIGHT))
 };
@@ -142,7 +133,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = LAYOUT( \
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL, \
   ALT_TAB, A(KC_1), A(KC_2), A(KC_3), A(KC_4),  A(KC_5),                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
-  _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,  KC_INS,                  KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,KC_F12,  _______, \
+  _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,  KC_INS,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,KC_F12,  _______, \
   _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_DEL, _______, XXXXXXX, KC_WBAK, XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT, _______, \
                              _______, _______, _______, _______, _______, _______, _______, KC_LALT \
 ),
@@ -406,7 +397,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false; // We handled this keypress
 
-    case ALT_TAB: // super alt tab macro
+    case ALT_TAB: // super/alt tab macro
         if (record->event.pressed) {
             if (!is_alt_tab_active) {
                 is_alt_tab_active = true;
@@ -517,7 +508,6 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case LSFT_T(KC_SPC):
     case LT(4, KC_SPC):
     case LT(3, KC_BSPC):
       return true;
