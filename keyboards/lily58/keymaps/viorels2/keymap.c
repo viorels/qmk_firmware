@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  ESC  |    | MUTE  |------+------+------+------+------+------|
  * |LShift|Alt/Z |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |RAlt//|RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RAlt |
+ *                   | LAlt | LGUI |LOW/SP| /Space  /       \Enter \  |RSE/BK|BackSP| RAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -89,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
   LCTL_GESC, KC_A,   KC_S,   KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
   KC_LSFT,LALT_T(KC_Z),KC_X, KC_C,    KC_V,    KC_B, KC_GESC,   KC_MUTE, KC_N,    KC_M,    KC_COMM, KC_DOT,  RALT_T(KC_SLSH), KC_RSFT, \
-                             KC_LALT, KC_LGUI, LOWER, LT(4, KC_SPC), LT(4, KC_ENT), LT(3,KC_BSPC), KC_BSPC, KC_RALT \
+                             KC_LALT, KC_LGUI, LT(LOWER, KC_SPC), LT(4, KC_SPC), LT(4, KC_ENT), LT(3,KC_BSPC), KC_BSPC, KC_RALT \
 ),
 /* Colemak
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RSE/BK|BackSP| RAlt |
+ *                   | LAlt | LGUI |LOW/SP| /Space  /       \Enter \  |RSE/BK|BackSP| RAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -122,9 +122,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      | LGUI | LAlt | Shift| Ctrl |  Del |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      | Undo | Cut  | Copy | Paste|  Ins |-------|    |-------| BBack|      |      |      | Alt  |      |
+ * |      | Undo | Cut  | Copy | Paste|  Ins |-------|    |-------| BBack|TabLft|TabRgt|      | Alt  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |ADJUST|BackSP| LAlt |
+ *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |BackSP|BackSP| LAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
@@ -133,8 +133,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL, \
   ALT_TAB, A(KC_1), A(KC_2), A(KC_3), A(KC_4),  A(KC_5),                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
   _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,  KC_DEL,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,KC_F12,  _______, \
-  _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_INS, _______, XXXXXXX, KC_WBAK, XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT, _______, \
-                             _______, _______, _______, _______, _______, _______, _______, KC_LALT \
+  _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_INS, _______, XXXXXXX, KC_WBAK, C(KC_PGUP), C(KC_PGDN), XXXXXXX, KC_LALT, _______, \
+                             _______, _______, _______, _______, _______, KC_BSPC, _______, KC_LALT \
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ~  |   !  |   @  |   [  |   ]  |   #  |-------.    ,-------|   +  |   _  |   (  |   )  |   :  |  "   |
  * |------+------+------+------+------+------|   ₿   |    |       |------+------+------+------+------+------|
- * |LShift|   ^  |   &  |   {  |   }  |   |  |-------|    |-------|   *  |   =  |   <  |   >  |Alt// |  \   |
+ * |   ^  |   $  |   &  |   {  |   }  |   |  |-------|    |-------|   *  |   =  |   <  |   >  |Alt// |  \   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| LAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
   KC_GRV,  KC_1,    KC_2,    KC_3, LT(0,KC_4), LT(0,KC_5),                KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, \
   RSFT(KC_GRV),RSFT(KC_1),RSFT(KC_2),KC_LBRC,KC_RBRC,RSFT(KC_3),          KC_PLUS, KC_UNDS, KC_LPRN, KC_RPRN, KC_COLN, KC_DQUO, \
-  _______, KC_CIRC, KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL, KC_LT, KC_GT, LALT_T(KC_SLSH), KC_BSLS, \
+  KC_CIRC, KC_DLR,  KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL, KC_LT, KC_GT, LALT_T(KC_SLSH), KC_BSLS, \
                              _______, _______, _______, _______, _______, _______,   _______, _______\
 // UC(0x20bf) ₿
 ),
@@ -227,11 +227,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 // Setting ADJUST layer RGB back to default
 void update_tri_layer_RGB(uint8_t layer1, uint8_t layer2, uint8_t layer3) {
+  /*
   if (IS_LAYER_ON(layer1) && IS_LAYER_ON(layer2)) {
     layer_on(layer3);
   } else {
     layer_off(layer3);
   }
+  */
 }
 
 void matrix_init_user(void) {
