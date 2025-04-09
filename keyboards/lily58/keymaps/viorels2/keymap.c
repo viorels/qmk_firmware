@@ -89,13 +89,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS, \
   LCTL_GESC, KC_A,   KC_S,   KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT), \
   KC_LSFT,LALT_T(KC_Z),KC_X, KC_C,    KC_V,    KC_B, KC_GESC,   KC_MUTE, KC_N,    KC_M,    KC_COMM, KC_DOT,  RALT_T(KC_SLSH), KC_RSFT, \
-                             KC_LALT, KC_LGUI, LT(LOWER, KC_SPC), LT(4, KC_SPC), LT(4, KC_ENT), LT(3,KC_BSPC), KC_BSPC, KC_RALT \
+                             KC_LALT, KC_LGUI, LT(_LOWER, KC_SPC), LT(4, KC_SPC), LT(4, KC_ENT), LT(3,KC_BSPC), KC_BSPC, KC_RALT \
 ),
 /* Colemak
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC/`|   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  Del |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  |  -   |
+ * | TAB  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   '  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |CTL/GE|   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |Ctrl/'|
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
  [_COLEMAK] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
-  _______, _______, _______, KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, _______, \
+  _______, _______, _______, KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT, _______, \
 //_______, GUI_A,   ALT_R,   CTL_S,   SHFT_T,  KC_D,                      _______, SFT_N,   CTL_E,   ALT_I,   GUI_O,   _______,
   _______, _______, KC_R,    KC_S,    KC_T,    KC_D,                      _______, KC_N,    KC_E,    KC_I,    KC_O,    _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, KC_K,    _______, _______, _______, _______, _______, \
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |AltTAB|Alt-1 |Alt-2 |Alt-3 |Alt-4 |Alt-5 |                    | PgUp | Home |  Up  |  End | F11  | Del  |
+ * |AltTAB|Alt-1 |Alt-2 |Alt-3 |Alt-4 |Alt-5 |                    | PgUp | Home |  Up  |  End | F11  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      | LGUI | LAlt | Shift| Ctrl |  Del |-------.    ,-------| PgDn | Left | Down | Right| F12  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -131,30 +131,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_LOWER] = LAYOUT( \
   KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F4,    KC_F5,                    KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_DEL, \
-  ALT_TAB, A(KC_1), A(KC_2), A(KC_3), A(KC_4),  A(KC_5),                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  KC_DEL, \
+  ALT_TAB, A(KC_1), A(KC_2), A(KC_3), A(KC_4),  A(KC_5),                  KC_PGUP, KC_HOME, KC_UP,   KC_END,  KC_F11,  _______, \
   _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL,  KC_DEL,                   KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT,KC_F12,  _______, \
   _______, C(KC_Z),C(KC_X),C(KC_INS),S(KC_INS), KC_INS, _______, XXXXXXX, KC_WBAK, C(KC_PGUP), C(KC_PGDN), XXXXXXX, KC_LALT, _______, \
                              _______, _______, _______, _______, _______, KC_BSPC, _______, KC_LALT \
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |  |   |
+ * |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |   `  |   1  |   2  |   3  |  4$  |  5%  |                    |   6  |   7  |   8  |   9  |   0  |  -   |
+ * |   `  |   1  |   2  |   3  |  $4  |  %5  |                    |  ^6  |   -  |      |      |   ;  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   ~  |   !  |   @  |   [  |   ]  |   #  |-------.    ,-------|   +  |   _  |   (  |   )  |   :  |  "   |
  * |------+------+------+------+------+------|   ₿   |    |       |------+------+------+------+------+------|
- * |   ^  |   $  |   &  |   {  |   }  |   |  |-------|    |-------|   *  |   =  |   <  |   >  |Alt// |  \   |
+ * |      |   ~  |   &  |   {  |   }  |   |  |-------|    |-------|   *  |   =  |   <  |   >  |Alt// |  \   |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| LAlt |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 [_RAISE] = LAYOUT( \
-  KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_PIPE, \
-  KC_GRV,  KC_1,    KC_2,    KC_3, LT(0,KC_4), LT(0,KC_5),                KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, \
+  KC_GRV,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  KC_GRV,  KC_1,    KC_2,    KC_3, LT(0,KC_4), LT(0,KC_5),                LT(0,KC_6), KC_MINS, XXXXXXX, XXXXXXX, KC_SCLN, KC_MINS, \
   RSFT(KC_GRV),RSFT(KC_1),RSFT(KC_2),KC_LBRC,KC_RBRC,RSFT(KC_3),          KC_PLUS, KC_UNDS, KC_LPRN, KC_RPRN, KC_COLN, KC_DQUO, \
-  KC_CIRC, KC_DLR,  KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL, KC_LT, KC_GT, LALT_T(KC_SLSH), KC_BSLS, \
+  _______, RSFT(KC_GRV),  KC_AMPR, KC_LCBR, KC_RCBR, KC_PIPE, BITCOIN, _______, KC_ASTR, KC_EQL, KC_LT, KC_GT, LALT_T(KC_SLSH), KC_BSLS, \
                              _______, _______, _______, _______, _______, _______,   _______, _______\
 // UC(0x20bf) ₿
 ),
@@ -410,17 +410,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         break;
 
     case LT(0,KC_4):             // https://github.com/qmk/qmk_firmware/blob/master/docs/mod_tap.md#changing-hold-function
-        if (!record->tap.count && record->event.pressed) {
-            tap_code16(RSFT(KC_4));  // Intercept hold function to send '$'
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(RSFT(KC_4));  // Intercept tap function to send '$'
+            return false;
+        } else if (record->event.pressed) {
+            tap_code16(KC_4); // Intercept hold function
             return false;
         }
         return true;             // Return true for normal processing of tap keycode
     case LT(0,KC_5):
-        if (!record->tap.count && record->event.pressed) {
-            tap_code16(RSFT(KC_5)); // Intercept hold function to send '%'
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(RSFT(KC_5)); // Intercept tap function to send '%'
+            return false;
+        } else if (record->event.pressed) {
+            tap_code16(KC_5); // Intercept hold function
             return false;
         }
         return true;             // Return true for normal processing of tap keycode
+    case LT(0,KC_6):
+        if (record->tap.count && record->event.pressed) {
+            tap_code16(S(KC_6)); // Intercept tap function
+            return false;
+        } else if (record->event.pressed) {
+            tap_code16(KC_6); // Intercept hold function
+            return false;
+        }
+        return true;
     case KC_CCCV:  // One key copy/paste
         if (record->event.pressed) {
             copy_paste_timer = timer_read();
