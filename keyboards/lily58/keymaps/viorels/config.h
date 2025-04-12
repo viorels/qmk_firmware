@@ -25,10 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 #define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
-
-//#define GRAVE_ESC_SHIFT_OVERRIDE
 
 #define ENCODERS_PAD_A { F5 }
 #define ENCODERS_PAD_B { F4 }
@@ -40,11 +36,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-#define TAPPING_FORCE_HOLD_PER_KEY
-// #define IGNORE_MOD_TAP_INTERRUPT
-// #define IGNORE_MOD_TAP_INTERRUPT_PER_KEY
-#define TAPPING_TERM 150
+#define TAPPING_TERM 250
 #define TAPPING_TERM_PER_KEY
+#define CHORDAL_HOLD
+#define PERMISSIVE_HOLD
+#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+
+#define QUICK_TAP_TERM_PER_KEY
 #define TAPPING_TOGGLE 1
 
 //#define MK_W_OFFSET_UNMOD 2

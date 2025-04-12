@@ -38,12 +38,12 @@ enum custom_keycodes {
 // Left-hand home row mods
 #define GUI_A LGUI_T(KC_A)
 #define ALT_R LALT_T(KC_R)
-#define CTL_S LCTL_T(KC_S)
-#define SHFT_T LSFT_T(KC_T)
+#define SFT_S LSFT_T(KC_S)
+#define CTRL_T LCTL_T(KC_T)
 
 // Right-hand home row mods
-#define SFT_N RSFT_T(KC_N)
-#define CTL_E RCTL_T(KC_E)
+#define CTL_N RCTL_T(KC_N)
+#define SFT_E RSFT_T(KC_E)
 #define ALT_I LALT_T(KC_I)
 #define GUI_O RGUI_T(KC_O)
 
@@ -89,8 +89,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  [_COLEMAK] = LAYOUT( \
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______, \
   _______, _______, _______, KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y,    KC_QUOT, _______, \
-//_______, GUI_A,   ALT_R,   CTL_S,   SHFT_T,  KC_D,                      _______, SFT_N,   CTL_E,   ALT_I,   GUI_O,   _______,
-  _______, _______, KC_R,    KC_S,    KC_T,    KC_D,                      _______, KC_N,    KC_E,    KC_I,    KC_O,    _______, \
+  _______, GUI_A,   ALT_R,   SFT_S,   CTRL_T,  KC_D,                      _______, CTL_N,   SFT_E,   ALT_I,   GUI_O,   _______, \
+  // _______, _______, KC_R,    KC_S,    KC_T,    KC_D,                      _______, KC_N,    KC_E,    KC_I,    KC_O,    _______,
   _______, _______, _______, _______, _______, _______, _______, _______, KC_K,    _______, _______, _______, _______, _______, \
                              _______, _______, _______, _______, _______, _______, _______, _______\
 ),
@@ -160,6 +160,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______, _______, _______, _______, _______, KC_0,    _______, _______ \
   ),
 };
+
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+    LAYOUT(
+        'L', 'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L',           'R', 'R', 'R', 'R', 'R', 'R',
+        'L', 'L', 'L', 'L', 'L', 'L', 'L', 'R', 'R', 'R', 'R', 'R', 'R', 'R',
+                       '*', '*', '*', '*', '*', '*', '*', '*'
+    );
 
 void rgblight_set_hsv_and_mode(uint8_t hue, uint8_t sat, uint8_t val, uint8_t mode) {
     rgblight_sethsv_noeeprom(hue, sat, val);
@@ -487,35 +496,35 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 #endif
 
-bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-    case LT(4, KC_SPC):
-    case LT(3, KC_BSPC):
-      return true;
-    default:
-      return false;
-  }
-}
-
-/*
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case LT(3,KC_BSPC):
+        case LT(_LOWER, KC_SPC):
+        case LT(3, KC_BSPC):
             return true;
         default:
             return false;
     }
 }
-*/
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
     case LCTL_GESC:
     case RCTL_T(KC_QUOT):
-    case LT(3,KC_BSPC):
+    case LT(_LOWER, KC_SPC):
+    case LT(3, KC_BSPC):
       return TAPPING_TERM - 50;
     default:
       return TAPPING_TERM;
+  }
+}
+
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LT(_LOWER, KC_SPC):
+    case LT(3, KC_BSPC):
+      return 0;
+    default:
+      return QUICK_TAP_TERM;
   }
 }
 
