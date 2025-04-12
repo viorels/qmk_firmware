@@ -47,27 +47,6 @@ enum custom_keycodes {
 #define ALT_I LALT_T(KC_I)
 #define GUI_O RGUI_T(KC_O)
 
-//Tap Dance Declarations
-enum {
-  TD_MINS_6 = 0,
-  TD_COLN_7,
-  TD_LBRC_8,
-  TD_RBRC_9,
-  TD_LEFT,
-  TD_RIGHT
-};
-
-//Tap Dance Definitions
-tap_dance_action_t tap_dance_actions[] = {
-  //Tap once for Esc, twice for Caps Lock
-  [TD_MINS_6]  = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_6),
-  [TD_COLN_7]  = ACTION_TAP_DANCE_DOUBLE(KC_COLN, KC_7),
-  [TD_LBRC_8]  = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_8),
-  [TD_RBRC_9]  = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_9),
-  [TD_LEFT] = ACTION_TAP_DANCE_DOUBLE(KC_LEFT, C(KC_LEFT)),
-  [TD_RIGHT] = ACTION_TAP_DANCE_DOUBLE(KC_RIGHT, C(KC_RIGHT))
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* QWERTY
